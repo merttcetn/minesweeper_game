@@ -19,7 +19,7 @@ This project implements a simple Minesweeper game using Python and the Tkinter l
     ```
 2. **Navigate to the project directory:**
     ```sh
-    cd minesweeper
+    cd minesweeper_game
     ```
 3. **Install the required dependencies:**
     ```sh
