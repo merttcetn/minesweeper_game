@@ -1,12 +1,9 @@
-from tkinter import Button, Label
+from tkinter import Button, Label, messagebox
 import settings
 import random
-import ctypes  # To throw a message when user clicked on a mine
 import sys  # To exit game when losing
 
-
 class Cell:
-
     all = []  # Creating a list to store 'all' instances
 
     cell_count_number = settings.CELL_COUNT  # Giving it the initial value
@@ -53,7 +50,6 @@ class Cell:
         if not self.is_mine_candidate:
             if self.is_mine:
                 self.show_mine()
-
             else:
                 if self.surrounding_mines_counter == 0:  # If we have left clicked on a '0' cell
                     for cell_obj in self.surrounding_cells:  # every cell surrounding it
@@ -70,7 +66,7 @@ class Cell:
 
     def show_mine(self):
         self.cell_button_object.configure(bg='red')  # Set the cell color to red if it is a mine
-        ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine.", "Game Over!", 0)  # Throw a message
+        messagebox.showerror("Game Over!", "You clicked on a mine.")
         sys.exit()  # To exit game
 
     @property  # Making the function a property to make it a read-only attribute
@@ -99,7 +95,7 @@ class Cell:
             # Checking whether if we have won;
             if Cell.cell_count_number == settings.WIN_COUNT:
                 Cell.cell_count_label_object.configure(text="YOU WON!")
-                ctypes.windll.user32.MessageBoxW(0, "You have won the game.", "YOU WON!", 0)
+                messagebox.showinfo("YOU WON!", "You have won the game.")
                 sys.exit()
 
             # Writing the surrounding mines to the cell after clicking
